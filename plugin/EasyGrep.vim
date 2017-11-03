@@ -292,14 +292,6 @@ function! s:GetGrepRootEx()
             endif
         endif
     elseif isdirectory(g:EasyGrepRoot)
-        " Trim a trailing slash
-        let g:EasyGrepRoot = substitute(g:EasyGrepRoot, "/$", "", "")
-        let fullRootPath = substitute(fnamemodify(g:EasyGrepRoot, ":p"), "/$", "", "")
-        if g:EasyGrepRoot[0] == '/' && g:EasyGrepRoot != fullRootPath
-            let g:EasyGrepRoot = fullRootPath
-        elseif match(g:EasyGrepRoot, "\\./", 0) != 0 && g:EasyGrepRoot != fullRootPath
-            let g:EasyGrepRoot = "./".g:EasyGrepRoot
-        endif
         let pathtoreturn = g:EasyGrepRoot
         let type = "directory"
     else
@@ -2484,8 +2476,8 @@ function! s:ConfigureGrepCommandParameters()
                 \ 'req_str_recurse': '',
                 \ 'req_str_caseignore': '-i',
                 \ 'req_str_casematch': '-s',
-                \ 'opt_str_patternprefix': "'",
-                \ 'opt_str_patternpostfix': "'",
+                \ 'opt_str_patternprefix': '"',
+                \ 'opt_str_patternpostfix': '"',
                 \ 'opt_str_wholewordprefix': '',
                 \ 'opt_str_wholewordpostfix': '',
                 \ 'opt_str_wholewordoption': '-w ',
